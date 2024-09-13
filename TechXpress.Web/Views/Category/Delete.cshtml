@@ -1,26 +1,41 @@
 ﻿@model Category
+@{
+    ViewBag.PageTitle = "Category Management";
+    ViewBag.CardTitle = "Delete Category";
+    Layout = "~/Views/Shared/_DashBoard.cshtml";
+}
 
-<h1>Delete</h1>
-<form asp-action="DeleteCategory" method="post">
-    <input hidden asp-for="Id" />
-    <div class="mb-3">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" disabled class="form-control" />
-        <span asp-validation-for="Name"  class="text-danger"></span>
+<div class="card shadow-sm">
+    <div class="card-header bg-danger text-white">
+        <h4>@ViewBag.CardTitle</h4>
     </div>
+    <div class="card-body">
+        <form asp-action="DeleteCategory" method="post">
+            <input hidden asp-for="Id" />
 
-    <div class="mb-3">
-        <label asp-for="Description"></label>
-        <input asp-for="Description" disabled class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" disabled class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" disabled class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" value="Delete" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Delete This Category
+                </button>
+                <a asp-action="Index" asp-controller="Category" class="btn btn-warning">
+                    <i class="fas fa-arrow-left"></i> Back to Index
+                </a>
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-        <button type="submit" value ="Delete"class="btn btn-danger">Delete This Category</button>
-        <a asp-action="index" asp-controller="Category" class="btn btn-warning">Back to Index</a>
-    </div>
-</form>
-
-
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
