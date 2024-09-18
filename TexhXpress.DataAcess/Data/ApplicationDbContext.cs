@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TechXpress.Web.Models;
+using TechXpress.Entities.Models;
 
-namespace TechXpress.Web.Data
+namespace TechXpress.DataAccess.Data
 {
     public class ApplicationDbContext :DbContext
     {

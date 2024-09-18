@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TechXpress.Web.Data;
-using TechXpress.Web.Models;
+using TechXpress.DataAccess.Data;
+using TechXpress.Entities.Models;
 
 namespace TechXpress.Web.Controllers
 {
@@ -32,6 +32,8 @@ namespace TechXpress.Web.Controllers
             {
                 _context.Categories.Add(category);
                 _context.SaveChanges();
+                TempData["Create"] = "Item has been created successfull";
+
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -56,6 +58,7 @@ namespace TechXpress.Web.Controllers
             {
                 _context.Categories.Update(category);
                 _context.SaveChanges();
+                TempData["Update"] = "Item has been deleted successfull";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -85,6 +88,7 @@ namespace TechXpress.Web.Controllers
             }
             _context.Categories.Remove(category);
             _context.SaveChanges();
+            TempData["Delete"] = "Item has been deleted successfully";
             return RedirectToAction("Index");
         }
     }

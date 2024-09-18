@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TechXpress.Web.Models
+namespace TechXpress.Entities.Models
 {
     public class Category
     {

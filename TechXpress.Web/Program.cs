@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TechXpress.Web.Data;
+using TechXpress.DataAccess.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

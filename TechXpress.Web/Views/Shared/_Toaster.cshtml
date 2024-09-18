@@ -1,0 +1,26 @@
+﻿@if (TempData["Create"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        Command: toastr["success"]("@TempData["Create"]", "Admin Dash Board Notification Center")
+    </script>
+}
+
+@if (TempData["Update"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        Command: toastr["warning"]("@TempData["Update"]", "Admin Dash Board Notification Center")
+    </script>
+}
+
+@if (TempData["Delete"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        Command: toastr["error"]("@TempData["Delete"]", "Admin Dash Board Notification Center")
+    </script>
+}

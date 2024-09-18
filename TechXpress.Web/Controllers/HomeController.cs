@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TechXpress.Web.Models;
+using TechXpress.Entities.Models;
+
 
 namespace TechXpress.Web.Controllers
 {

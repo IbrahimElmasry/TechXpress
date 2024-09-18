@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- Remove the extra quote from the end of this line -->
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" />
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -271,6 +275,8 @@
           </div>
         </div>
         <div class="card-body">
+         <partial name="_Toaster" />
+
           @RenderBody()
 
         </div>
