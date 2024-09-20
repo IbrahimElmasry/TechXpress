@@ -1,4 +1,3 @@
-License
 MIT License
 
 Copyright (c) 2024 Ibrahim Tarek
@@ -13,3 +12,9 @@ Users of the software must not misrepresent the source of the software or its co
 
 Any modifications made to the Software should be documented and attributed appropriately.
 
+Contact
+For any inquiries or support, please contact:
+
+Name: Ibrahim Tarek
+Email: ibrahimtarek1965@outlook.com
+Phone: +201019804919
