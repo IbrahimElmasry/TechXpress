@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechXpress.DataAccess.Data;
 using TechXpress.Entities.Models;
+using TechXpress.Entities.Repositories;
 
 namespace TechXpress.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public CategoryController(ApplicationDbContext context)
+       private IUnitOfWork _unitOfWork;
+
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
 
         public IActionResult Index()
         {
-            var categories = _context.Categories.ToList();
+            var categories = _unitOfWork.Category.GetAll();
             return View(categories);
         }
 
@@ -30,8 +32,12 @@ namespace TechXpress.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+               // _context.Categories.Add(category);
+                _unitOfWork.Category.Add(category);
+
+                //_context.SaveChanges();
+                _unitOfWork.complete();
+
                 TempData["Create"] = "Item has been created successfull";
 
                 return RedirectToAction("Index");
@@ -47,7 +53,8 @@ namespace TechXpress.Web.Controllers
             {
                 NotFound();
             }
-            var category = _context.Categories.Find(id);
+            //  var category = _context.Categories.Find(id);
+            var category = _unitOfWork.Category.GetFirstOrDfeault(x => x.Id == id);
             return View(category);
         }
         [HttpPost]
@@ -56,8 +63,10 @@ namespace TechXpress.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(category);
-                _context.SaveChanges();
+                //_context.Categories.Update(category);
+                //_context.SaveChanges();
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.complete();
                 TempData["Update"] = "Item has been deleted successfull";
                 return RedirectToAction("Index");
             }
@@ -72,7 +81,7 @@ namespace TechXpress.Web.Controllers
             {
                 NotFound();
             }
-            var category = _context.Categories.Find(id);
+            var category = _unitOfWork.Category.GetFirstOrDfeault(x => x.Id == id);
             return View(category);
         }
 
@@ -81,13 +90,15 @@ namespace TechXpress.Web.Controllers
         public IActionResult DeleteCategory(int? id)
         {
 
-            var category = _context.Categories.Find(id);
+            var category = _unitOfWork.Category.GetFirstOrDfeault(x => x.Id == id);
             if(category == null)
             {
                 NotFound();
             }
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
+            //_context.Categories.Remove(category);
+            //_context.SaveChanges();
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.complete();
             TempData["Delete"] = "Item has been deleted successfully";
             return RedirectToAction("Index");
         }

@@ -10,10 +10,10 @@ namespace TechXpress.Entities.Repositories
     public interface IGenericRepository<T> where T : class
     {
         //_context.category.Tolist
-        IEnumerable<T> GetAll(Expression<Func<T , bool>> predicate , string? IncludeWord);
+        IEnumerable<T> GetAll(Expression<Func<T , bool>>? predicate =null , string? IncludeWord = null);
 
 
-        T GetFirstOrDfeault(Expression<Func<T, bool>> predicate, string? IncludeWord);
+        T GetFirstOrDfeault(Expression<Func<T, bool>>? predicate = null, string? IncludeWord = null);
 
         void Add(T entity);
 

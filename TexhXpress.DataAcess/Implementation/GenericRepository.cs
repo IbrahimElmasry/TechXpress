@@ -25,7 +25,7 @@ namespace TexhXpress.DataAccess.Implementation
             _dbset.Add(entity);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate, string? IncludeWord)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> ?predicate = null, string? IncludeWord = null)
         {
             IQueryable<T> query = _dbset;
             if(predicate != null)
@@ -42,7 +42,7 @@ namespace TexhXpress.DataAccess.Implementation
             return query.ToList();
         }
 
-        public T GetFirstOrDfeault(Expression<Func<T, bool>> predicate, string? IncludeWord)
+        public T GetFirstOrDfeault(Expression<Func<T, bool>>? predicate = null, string? IncludeWord = null)
         {
             IQueryable<T> query = _dbset;
             if (predicate != null)
