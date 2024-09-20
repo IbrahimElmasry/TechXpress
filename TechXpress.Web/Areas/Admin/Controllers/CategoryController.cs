@@ -3,11 +3,12 @@ using TechXpress.DataAccess.Data;
 using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
 
-namespace TechXpress.Web.Controllers
+namespace TechXpress.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-       private IUnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
         public CategoryController(IUnitOfWork unitOfWork)
         {
@@ -22,7 +23,7 @@ namespace TechXpress.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
@@ -32,7 +33,7 @@ namespace TechXpress.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               // _context.Categories.Add(category);
+                // _context.Categories.Add(category);
                 _unitOfWork.Category.Add(category);
 
                 //_context.SaveChanges();
@@ -49,7 +50,7 @@ namespace TechXpress.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id == null || id ==0)
+            if (id == null || id == 0)
             {
                 NotFound();
             }
@@ -91,7 +92,7 @@ namespace TechXpress.Web.Controllers
         {
 
             var category = _unitOfWork.Category.GetFirstOrDfeault(x => x.Id == id);
-            if(category == null)
+            if (category == null)
             {
                 NotFound();
             }
