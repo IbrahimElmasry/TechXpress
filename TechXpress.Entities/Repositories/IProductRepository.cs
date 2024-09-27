@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechXpress.Entities.Models;
 
 namespace TechXpress.Entities.Repositories
 {
-    public interface IUnitOfWork  : IDisposable
+    public interface IProductRepository : IGenericRepository<Product>
     {
-        ICategoryRepository Category{ get; }
-        IProductRepository Product { get; }
-        int complete();
+        void Update(Product product);   
     }
 }

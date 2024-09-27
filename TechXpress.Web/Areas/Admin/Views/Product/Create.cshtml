@@ -1,0 +1,60 @@
+﻿@model ProductVM
+@{
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Create Product";
+    Layout = "~/Views/Shared/_DashBoard.cshtml";
+}
+
+<div class="card shadow-lg border-0 rounded-3">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">@ViewBag.CardTitle</h4>
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label asp-for="product.Name" class="form-label fw-bold">Product Name</label>
+                <input asp-for="product.Name" class="form-control form-control-lg" placeholder="Enter Product name" />
+                <span asp-validation-for="product.Name" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="product.Description" class="form-label fw-bold">Product Description</label>
+                <textarea asp-for="product.Description" class="form-control form-control-lg" rows="4" placeholder="Enter Product description"></textarea>
+                <span asp-validation-for="product.Description" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="product.Price" class="form-label fw-bold">Product Price</label>
+                <input asp-for="product.Price" type="number" class="form-control form-control-lg" placeholder="Enter Product Price" step="0.01" />
+                <span asp-validation-for="product.Price" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="product.Img" class="form-label fw-bold">Product Image</label>
+                <input type="file" name="upload" class="form-control form-control-lg" accept="image/*" />
+                <span asp-validation-for="product.Img" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="product.CategoryId" class="form-label fw-bold">Category</label>
+                <select asp-for="product.CategoryId" asp-items="Model.CategoryList" class="form-select form-select-lg">
+                    <option disabled selected>-- Select Category --</option>
+                </select>
+                <span asp-validation-for="product.CategoryId" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <i class="fas fa-save me-2"></i> Submit Product
+                </button>
+                <a asp-action="Index" asp-controller="Product" class="btn btn-secondary btn-lg px-5">
+                    <i class="fas fa-arrow-left me-2"></i> Back to Index
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

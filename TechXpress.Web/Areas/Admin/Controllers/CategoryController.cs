@@ -68,7 +68,7 @@ namespace TechXpress.Web.Areas.Admin.Controllers
                 //_context.SaveChanges();
                 _unitOfWork.Category.Update(category);
                 _unitOfWork.complete();
-                TempData["Update"] = "Item has been deleted successfull";
+                TempData["Update"] = "Item has been Updated successfull";
                 return RedirectToAction("Index");
             }
             return View(category);

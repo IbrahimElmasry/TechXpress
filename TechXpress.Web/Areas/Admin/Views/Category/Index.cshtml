@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_DashBoard.cshtml";
 }
 <div class="mb-3 d-flex justify-content-end">
-    <a class="btn btn-primary" href="/Category/Create">
+    <a class="btn btn-primary" href="/Admin/Category/Create">
         <i class="fas fa-plus"></i> Create Category
     </a>
 </div>
@@ -25,10 +25,10 @@
             <td>@item.Description</td>
             <td>@item.CreatedOn</td>
             <td>
-                <a class="btn btn-success" href="/Category/Edit/@item.Id">Edit</a>
+                <a class="btn btn-success" href="/Admin/Category/Edit/@item.Id">Edit</a>
             </td>
             <td>
-                <a class="btn btn-danger" href="/Category/Delete/@item.Id">Delete</a>
+                <a class="btn btn-danger" href="/Admin/Category/Delete/@item.Id">Delete</a>
             </td>
         </tr>
     }

@@ -20,7 +20,7 @@ namespace TexhXpress.DataAccess.Implementation
         public void Update(Category category)
         {
             var CategoryInDb = _context.Categories.FirstOrDefault(x => x.Id == category.Id);
-            if (CategoryInDb == null)
+            if (CategoryInDb != null)
             {
                 CategoryInDb.Name=category.Name;
                 CategoryInDb.Description=category.Description;

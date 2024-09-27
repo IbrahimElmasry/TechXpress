@@ -18,7 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TechXpress.Entities\TechXpress.Entities.csproj" />
     <ProjectReference Include="..\TexhXpress.DataAcess\TexhXpress.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Products\" />
   </ItemGroup>
 
 </Project>
