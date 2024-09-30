@@ -21,13 +21,13 @@ namespace TexhXpress.DataAccess.Implementation
         public void Update(Product product)
         {
             var ProductInDb = _context.Products.FirstOrDefault(x => x.ID == product.ID);
-            if (ProductInDb == null)
+            if (ProductInDb != null)
             {
                 ProductInDb.Name = product.Name;
                 ProductInDb.Description = product.Description;
                 ProductInDb.Price = product.Price;
                 ProductInDb.Img = product.Img;
-                ProductInDb.Category = product.Category;
+                ProductInDb.CategoryId= product.CategoryId;
                 
                
             }

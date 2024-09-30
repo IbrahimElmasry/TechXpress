@@ -27,17 +27,8 @@ namespace TechXpress.Web.Areas.Admin.Controllers
         }
         public IActionResult GetData()
         {
-            var products = _unitOfWork.Product.GetAll(IncludeWord: "Category") // Include the Category if needed
-                .Select(p => new
-                {
-                    p.ID,
-                    p.Name,
-                    p.Description,
-                    p.Price,
-                    CategoryName = p.Category.Name // Ensure you access the name correctly
-                }).ToList();
-
-            return Json(new { data = products });
+            var categories = _unitOfWork.Product.GetAll(IncludeWord: "Category");
+            return Json(new { data = categories });
         }
 
         [HttpGet]
@@ -60,42 +51,23 @@ namespace TechXpress.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Get the path to the wwwroot folder
-                string rootPath = _webHostEnvironment.WebRootPath;
-
-                if (upload != null && upload.Length > 0) // Check if a file was uploaded
+                string RootPath = _webHostEnvironment.WebRootPath;
+                if (upload != null)
                 {
-                    // Generate a new filename using GUID to avoid conflicts
                     string filename = Guid.NewGuid().ToString();
-                    var uploadPath = Path.Combine(rootPath, "@Images", "Products");
+                    var Upload = Path.Combine(RootPath, @"Images\Products");
                     var ext = Path.GetExtension(upload.FileName);
 
-                    // Ensure the upload directory exists
-                    if (!Directory.Exists(uploadPath))
+                    using (var filestream = new FileStream(Path.Combine(Upload, filename + ext), FileMode.Create))
                     {
-                        Directory.CreateDirectory(uploadPath);
+                        upload.CopyTo(filestream);
                     }
-
-                    // Combine the upload path with the new filename and extension
-                    string fullPath = Path.Combine(uploadPath, filename + ext);
-
-                    // Use a using statement to ensure the file stream is properly disposed
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        // Copy the uploaded file to the new file stream
-                        upload.CopyTo(fileStream);
-                    }
-
-                    // Set the image path in the product view model
-                    productVM.product.Img = Path.Combine("Images", "Products", filename + ext).Replace("\\", "/"); // Ensure the path is correct for web serving
+                    productVM.product.Img = @"Images\Products\" + filename + ext;
                 }
 
-                // Add the product to the database using Unit of Work
                 _unitOfWork.Product.Add(productVM.product);
                 _unitOfWork.complete();
-
-                TempData["Create"] = "Item has been created successfully";
-
+                TempData["Create"] = "Item has Created Successfully";
                 return RedirectToAction("Index");
             }
             return View(productVM.product);
@@ -105,58 +77,76 @@ namespace TechXpress.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
+            if (id == null | id == 0)
             {
                 NotFound();
             }
-            //  var product = _context.Products.Find(id);
-            var product = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == id);
-            return View(product);
+
+            ProductVM productVM = new ProductVM()
+            {
+                product = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == id),
+                CategoryList = _unitOfWork.Category.GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                })
+            };
+            return View(productVM);
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductVM productVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                //_context.Products.Update(product);
-                //_context.SaveChanges();
-                _unitOfWork.Product.Update(product);
+                string RootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString();
+                    var Upload = Path.Combine(RootPath, @"Images\Products");
+                    var ext = Path.GetExtension(file.FileName);
+
+                    if (productVM.product.Img != null)
+                    {
+                        var oldimg = Path.Combine(RootPath, productVM.product.Img.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldimg))
+                        {
+                            System.IO.File.Delete(oldimg);
+                        }
+                    }
+
+                    using (var filestream = new FileStream(Path.Combine(Upload, filename + ext), FileMode.Create))
+                    {
+                        file.CopyTo(filestream);
+                    }
+                    productVM.product.Img = @"Images\Products\" + filename + ext;
+                }
+                _unitOfWork.Product.Update(productVM.product);
                 _unitOfWork.complete();
-                TempData["Update"] = "Item has been deleted successfull";
+                TempData["Update"] = "Data has Updated Successfully";
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(productVM.product);
         }
 
-
-        [HttpGet]
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var productIndb = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == id);
+            if (productIndb == null)
             {
-                NotFound();
+                return Json(new { success = false, message = "Error while Deleting" });
             }
-            var product = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == id);
-            return View(product);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteProduct(int? id)
-        {
-
-            var product = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == id);
-            if (product == null)
+            _unitOfWork.Product.Remove(productIndb);
+            var oldimg = Path.Combine(_webHostEnvironment.WebRootPath, productIndb.Img.TrimStart('\\'));
+            if (System.IO.File.Exists(oldimg))
             {
-                NotFound();
+                System.IO.File.Delete(oldimg);
             }
-            //_context.Products.Remove(product);
-            //_context.SaveChanges();
-            _unitOfWork.Product.Remove(product);
             _unitOfWork.complete();
-            TempData["Delete"] = "Item has been deleted successfully";
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "file has been Deleted" });
         }
     }
 }

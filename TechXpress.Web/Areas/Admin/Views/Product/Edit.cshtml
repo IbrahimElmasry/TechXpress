@@ -1,0 +1,67 @@
+﻿@model ProductVM
+
+@{
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Edit Product";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="product.ID" />
+            <input type="hidden" asp-for="product.Img" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="product.Name" class="control-label"></label>
+                <input asp-for="product.Name" class="form-control" />
+                <span asp-validation-for="product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="product.Description" class="control-label"></label>
+                <textarea id="mytextarea" asp-for="product.Description" class="form-control"></textarea>
+                <span asp-validation-for="product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="product.Price" class="control-label"></label>
+                <input asp-for="product.Price" class="form-control" />
+                <span asp-validation-for="product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="product.Img" class="control-label"></label>
+                <input type="file" name="file" id="imgfile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="product.CategoryId" class="control-label"></label>
+                <select asp-for="product.CategoryId" class="form-control" asp-items="Model.CategoryList">
+                    <option disabled selected>-- Select Category --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div class="container">
+            <img id="ImagePrevew" src="~/@Model.product.Img" width="300" height="300" />
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+}
