@@ -20,7 +20,6 @@ namespace TechXpress.Web.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-
         public IActionResult Index()
         {
             return View();

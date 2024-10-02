@@ -1,0 +1,54 @@
+﻿@model ShoppingCart
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-6">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="~/@Model.Product.Img" alt="Product Image" class="img-responsive"  width="600" height="700">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product details -->
+            <div class="col-md-6">
+                <div class="product-details">
+                    <!-- Category display -->
+                    <div class="product-category">
+                        <span class="badge badge-info">@Model.Product.Category.Name</span>
+                    </div>
+
+                    <h2 class="product-name">@Model.Product.Name</h2>
+                    <div>
+                        <h3 class="product-price">@Model.Product.Price.ToString("C")</h3>
+                        <span class="product-available">In Stock</span>
+                    </div>
+                    <!-- Updated description -->
+                    <p>@Model.Product.Description</p>
+
+                    <div class="add-to-cart d-flex align-items-center">
+                        <div class="qty-label me-3">
+                            Qty
+                            <div class="d-flex">
+                                <input class="form-control text-center me-3" id="inputQuantity" asp-for="Count" style="max-width: 100px;" />
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </div>
+
+
+
+            </div>
+            <!-- /Product details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
