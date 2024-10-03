@@ -61,7 +61,6 @@
             <div class="col-md-12">
                 <div class="section-title text-center mb-5">
                     <h3 class="title">New Products</h3>
-
                 </div>
             </div>
             <!-- /section title -->
@@ -72,8 +71,8 @@
                         @foreach (var item in Model)
                         {
                             <!-- product -->
-                            <div class="col-md-3 col-xs-6 mb-4">
-                                <div class="product card shadow-sm h-100">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex">
+                                <div class="product card shadow-sm flex-fill h-100">
                                     <div class="product-img">
                                         <a href="/Customer/Home/Details/@item.ID">
                                             <img src="~/@item.Img" alt="Product Image" class="card-img-top img-fluid" style="max-height: 250px; object-fit: cover;">
@@ -100,3 +99,16 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+
+<style>
+    .product {
+        min-height: 400px; /* Ensure consistent height for products */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .products-grid .col-md-4, .products-grid .col-sm-6 {
+        display: flex;
+    }
+</style>
