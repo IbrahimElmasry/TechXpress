@@ -1,26 +1,110 @@
-﻿<!-- Start Products Section -->
-<section class="trending-product section" style="margin-top: 12px;">
+﻿<!-- Start Hero Area -->
+<section class="hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 custom-padding-right">
+                <div class="slider-head">
+                    <!-- Start Hero Slider -->
+                    <div class="hero-slider">
+                        <!-- Start Single Slider -->
+                        <div class="single-slider"
+                             style="background-image: url('/assets/images/hero/slider-bg1.jpg');">
+                            <div class="content">
+                                <h2>
+                                    <span>No restocking fee ($35 savings)</span>
+                                    The M75 Sport Watch
+                                </h2>
+                                <p>
+                                    The M75 Sport Watch is a water-resistant fitness tracker with heart rate monitoring and GPS, offering up to 10 days of battery life and smart notifications.
+                                </p>
+                                <h3><span>Now Only</span> $320.99</h3>
+                                <div class="button">
+                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Slider -->
+                        <!-- Start Single Slider -->
+                        <div class="single-slider"
+                             style="background-image: url('/assets/images/hero/slider-bg2.jpg');">
+                            <div class="content">
+                                <h2>
+                                    <span>Big Sale Offer</span>
+                                    Get the Best Deal on CCTV Camera
+                                </h2>
+                                <p>
+                                    The CCTV Camera provides high-definition video surveillance with night vision and motion detection, ensuring your property stays secure around the clock.
+                                </p>
+                                <div class="button">
+                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                </div>
+                                <h3><span>Combo Only:</span> $590.00</h3>
+                            </div>
+                        </div>
+                        <!-- End Single Slider -->
+                    </div>
+                    <!-- End Hero Slider -->
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
+                        <!-- Start Small Banner -->
+                        <div class="hero-small-banner"
+                             style="background-image: url('/assets/images/hero/slider-bnr.jpg');">
+                            <div class="content">
+                                <h2>
+                                    <span>New line required</span>
+                                    iPhone 12 Pro Max
+                                </h2>
+                                <h3>$259.99</h3>
+                            </div>
+                        </div>
+                        <!-- End Small Banner -->
+                    </div>
+                    <div class="col-lg-12 col-md-6 col-12">
+                        <!-- Start Small Banner -->
+                        <div class="hero-small-banner style2">
+                            <div class="content">
+                                <h2>Weekly Sale!</h2>
+                                <p>Saving up to 50% off all online store items this week.</p>
+                                <div class="button">
+                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Small Banner -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Hero Area -->
+<!-- Start Products Section -->
+<section id="products" class="trending-product section" style="margin-top: 12px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center mb-5">
                     <h3 class="title">Trending Products</h3>
-          
-                    <br/>
+                    <br />
                     <p>
                         We specialize in providing a wide range of high-quality laptops and mobile devices to suit every need.
-                        Explore our curated selection and discover the perfect technology to enhance your lifestyle
+                        Explore our curated selection and discover the perfect technology to enhance your lifestyle.
                     </p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="products-grid d-flex flex-wrap justify-content-between"> <!-- Adjusted class for flex -->
+                <div class="products-grid d-flex flex-wrap justify-content-between">
+                    <!-- Adjusted class for flex -->
                     <!-- Combined Product List -->
                     @foreach (var item in Model) // Assuming Model contains both new and trending products
                     {
-                        <div class="single-product col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Added responsive columns -->
+                        <div class="single-product col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <!-- Added responsive columns -->
                             <div class="product-image">
                                 <a href="/Customer/Home/Details/@item.ID">
                                     <img src="~/@item.Img" alt="Product Image" style="max-height: 250px; object-fit: cover;">

@@ -2,29 +2,67 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                Hello, @UserManager.GetUserName(User)
-            </a>
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+<div class="top-end">
+    <div class="user">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <i class="lni lni-user"></i>
+            <span>
+                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index">
+                    Hello, @UserManager.GetUserName(User)
+                </a>
+            </span>
+            <form id="logoutForm" class="d-inline" asp-area="Identity" asp-page="/Account/Logout"
                   asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-white border-0">Logout</button>
+                <button id="logout" type="submit" class="btn btn-link text-white border-0">Logout</button>
             </form>
-        </li>
+        }
+        else
+        {
+            <span>Hello</span>
+        }
+    </div>
+    <ul class="user-login">
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
+                    <i class="fa fa-user-plus"></i> Register
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
+                    <i class="fa fa-sign-in"></i> Login
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<style>
+    .user {
+        display: flex; /* Ensure user icon and name are in one line */
+        align-items: center; /* Center items vertically */
     }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
-                <i class="fa fa-user-plus"></i> Register
-            </a>
-            <span class="separator">&#8226;</span>
-            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
-                <i class="fa fa-sign-in"></i> Login
-            </a>
-        </li>
+
+        .user i {
+            margin-right: 5px; /* Space between icon and text */
+        }
+
+    .user-login {
+        list-style-type: none; /* Remove default list styling */
+        padding: 0; /* Remove default padding */
+        margin-left: 20px; /* Space between user info and login options */
+        display: flex; /* Align login items in a row */
+        align-items: center; /* Center items vertically */
     }
-</ul>
+
+        .user-login li {
+            margin-left: 15px; /* Space between login items */
+        }
+
+    .btn-link {
+        color: inherit; /* Make button color inherit the text color */
+    }
+
+</style>
