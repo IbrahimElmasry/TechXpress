@@ -1,10 +1,74 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Access Denied";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
+<header class="access-denied-header text-center py-5">
+    <div class="access-icon mb-4">
+        <i class="fas fa-exclamation-triangle fa-5x text-warning"></i> <!-- Using a warning icon for subtle alert -->
+    </div>
+    <h1 class="display-4 text-danger font-weight-bold">@ViewData["Title"]</h1>
+    <p class="lead text-muted mb-4">Unfortunately, you don’t have permission to access this page.</p>
+    <a href="/" class="btn btn-primary btn-lg px-5 mt-4">Return to Home</a>
 </header>
+
+<style>
+    /* Styling the header container */
+    .access-denied-header {
+        background-color: #f8f9fa; /* Light background color */
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 3rem;
+        max-width: 700px;
+        margin: 0 auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        transition: box-shadow 0.3s ease, transform 0.3s ease; /* Subtle transition effects */
+    }
+
+    .access-denied-header:hover {
+        transform: scale(1.02); /* Slight scale on hover to make it feel interactive */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    }
+
+    /* Large, bold title with appropriate spacing */
+    .display-4 {
+        font-size: 2.5rem;
+        color: #dc3545;
+        margin-bottom: 1rem;
+    }
+
+    /* Subtle muted lead text */
+    .lead {
+        font-size: 1.2rem;
+        color: #6c757d;
+    }
+
+    /* Styling the call-to-action button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 30px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px); /* Lift the button slightly on hover */
+    }
+
+    /* Icon styling with size and color */
+    .access-icon {
+        color: #ffc107; /* Bootstrap warning color */
+        margin-bottom: 1.5rem;
+    }
+
+    /* Adjustments for responsiveness */
+    
+
+</style>
+
+<!-- Add FontAwesome for the icon -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

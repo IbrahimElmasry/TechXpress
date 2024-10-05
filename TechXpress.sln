@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechXpress.Entities", "Tech
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechXpress.Web", "TechXpress.Web\TechXpress.Web.csproj", "{3CC10CEA-A489-4B2C-9881-E08B768B97CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechXpress.Utilities", "TechXpress.Utilities\TechXpress.Utilities.csproj", "{118C8A58-87A0-41F5-A4E0-48661299A329}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3CC10CEA-A489-4B2C-9881-E08B768B97CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CC10CEA-A489-4B2C-9881-E08B768B97CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CC10CEA-A489-4B2C-9881-E08B768B97CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{118C8A58-87A0-41F5-A4E0-48661299A329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118C8A58-87A0-41F5-A4E0-48661299A329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118C8A58-87A0-41F5-A4E0-48661299A329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118C8A58-87A0-41F5-A4E0-48661299A329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

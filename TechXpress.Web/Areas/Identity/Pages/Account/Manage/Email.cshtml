@@ -5,40 +5,106 @@
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="email-form" method="post">
-            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
-            @if (Model.IsEmailConfirmed)
-            {
-                <div class="form-floating mb-3 input-group">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+<div class="container my-5">
+    <h3 class="text-center mb-4">@ViewData["Title"]</h3>
+
+    <partial name="_StatusMessage" for="StatusMessage" />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form id="email-form" method="post" class="p-4 border rounded shadow-sm">
+                <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
+
+                @if (Model.IsEmailConfirmed)
+                {
+                    <div class="form-floating mb-4 input-group shadow-sm">
+                        <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
                         <div class="input-group-append">
-                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                            <span class="h-100 input-group-text bg-success text-white font-weight-bold">✓</span>
                         </div>
-                    <label asp-for="Email" class="form-label"></label>
+                        <label asp-for="Email" class="form-label"></label>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-floating mb-4 shadow-sm">
+                        <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                        <label asp-for="Email" class="form-label"></label>
+                        <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    </div>
+                }
+
+                <div class="form-floating mb-4 shadow-sm">
+                    <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
+                    <label asp-for="Input.NewEmail" class="form-label"></label>
+                    <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
                 </div>
-            }
-            else
-            {
-                <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
-                    <label asp-for="Email" class="form-label"></label>
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                </div>
-            }
-            <div class="form-floating mb-3">
-                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
-                <label asp-for="Input.NewEmail" class="form-label"></label>
-                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
-            </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
-        </form>
+
+                <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    /* Styling the form container */
+    #email-form {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+    }
+
+    /* Styling form inputs */
+    .form-floating input {
+        border-radius: 0.25rem;
+        box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.1);
+    }
+
+    .form-floating label {
+        color: #6c757d;
+    }
+
+    /* Disabled email field */
+    .form-floating input:disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+    }
+
+    /* Custom button styles */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.02);
+    }
+
+    .btn-link {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .btn-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    /* Success checkmark */
+    .input-group-text {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+    }
+
+   
+</style>

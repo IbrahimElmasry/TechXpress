@@ -23,6 +23,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\TechXpress.Utilities\TechXpress.Utilities.csproj" />
 		<ProjectReference Include="..\TexhXpress.DataAcess\TexhXpress.DataAccess.csproj" />
 	</ItemGroup>
 

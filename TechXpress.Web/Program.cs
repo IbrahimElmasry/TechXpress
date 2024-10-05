@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using TechXpress.DataAccess.Data;
 using TechXpress.Entities.Repositories;
+using TechXpress.Utilities;
 using TexhXpress.DataAccess.Implementation;
 
 
@@ -13,9 +15,12 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(
 builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser , IdentityRole>(options=>options.Lockout.DefaultLockoutTimeSpan= TimeSpan.FromDays(1))
+    .AddDefaultTokenProviders().AddDefaultUI()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork , UnitOfWork>();
 
 var app = builder.Build();

@@ -1,5 +1,5 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
@@ -9,17 +9,21 @@
     }
 }
 
-<h1>Manage your account</h1>
+<div class="container my-5">
+    <h1 class="text-center mb-4">Manage Your Account</h1>
 
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
     <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
+        <div class="col-md-3 mb-3">
+            <div class="p-3 border rounded shadow-sm bg-light">
+                <h4 class="mb-3">Settings</h4>
+                <partial name="_ManageNav" />
+            </div>
         </div>
+
         <div class="col-md-9">
-            @RenderBody()
+            <div class="p-4 border rounded shadow-sm bg-white">
+                @RenderBody()
+            </div>
         </div>
     </div>
 </div>
@@ -27,3 +31,29 @@
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .border {
+        border: 1px solid #ddd;
+    }
+
+    .container {
+        max-width: 1100px;
+    }
+
+   
+</style>

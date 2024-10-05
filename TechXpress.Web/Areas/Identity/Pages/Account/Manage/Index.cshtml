@@ -5,26 +5,77 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="Username" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+<div class="container my-5">
+    <h3 class="text-center mb-4">@ViewData["Title"]</h3>
+
+    <partial name="_StatusMessage" for="StatusMessage" />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form id="profile-form" method="post" class="p-4 border rounded shadow-lg bg-light">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Username" class="form-control shadow-sm" placeholder="Please choose your username." disabled />
+                    <label asp-for="Username" class="form-label"></label>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Input.PhoneNumber" class="form-control shadow-sm" placeholder="Please enter your phone number." />
+                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    /* Background and border styling for the form */
+    #profile-form {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6; /* Subtle border for clarity */
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075); /* Soft shadow */
+    }
+
+    /* Custom form control styles */
+    .form-floating input {
+        border-radius: 0.25rem;
+        box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.1); /* Add shadow for focus */
+    }
+
+    .form-floating label {
+        color: #6c757d;
+    }
+
+    .form-floating input:disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+    }
+
+    /* Styling the button */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.02); /* Slight scale effect on hover */
+    }
+
+    /* For mobile responsiveness */
+
+
+        #profile-form {
+            padding: 1.5rem;
+        }
+    }
+</style>
