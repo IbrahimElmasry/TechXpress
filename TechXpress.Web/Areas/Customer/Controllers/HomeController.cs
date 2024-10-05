@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
-using TechXpress.Entities.ViewModels;
 
 namespace TechXpress.Web.Areas.Customer.Controllers
 {
