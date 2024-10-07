@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Product>
+
 <!-- Start Hero Area -->
 <section class="hero-area">
     <div class="container">
@@ -19,7 +20,7 @@
                                 </p>
                                 <h3><span>Now Only</span> $320.99</h3>
                                 <div class="button">
-                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                    <a href="#products" class="btn">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +36,7 @@
                                     The CCTV Camera provides high-definition video surveillance with night vision and motion detection, ensuring your property stays secure around the clock.
                                 </p>
                                 <div class="button">
-                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                    <a href="#products" class="btn">Shop Now</a>
                                 </div>
                                 <h3><span>Combo Only:</span> $590.00</h3>
                             </div>
@@ -48,7 +49,6 @@
             <div class="col-lg-4 col-12">
                 <div class="row">
                     <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
-                        <!-- Start Small Banner -->
                         <div class="hero-small-banner" style="background-image: url('/assets/images/hero/slider-bnr.jpg');">
                             <div class="content">
                                 <h2>
@@ -58,20 +58,17 @@
                                 <h3>$259.99</h3>
                             </div>
                         </div>
-                        <!-- End Small Banner -->
                     </div>
                     <div class="col-lg-12 col-md-6 col-12">
-                        <!-- Start Small Banner -->
                         <div class="hero-small-banner style2">
                             <div class="content">
                                 <h2>Weekly Sale!</h2>
                                 <p>Saving up to 50% off all online store items this week.</p>
                                 <div class="button">
-                                    <a href="#products" class="btn">Shop Now</a> <!-- Updated link -->
+                                    <a href="#products" class="btn">Shop Now</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- End Small Banner -->
                     </div>
                 </div>
             </div>
@@ -79,56 +76,66 @@
     </div>
 </section>
 <!-- End Hero Area -->
-<!-- Start Products Section -->
-<section id="products" class="trending-product section" style="margin-top: 12px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-title text-center mb-5">
-                    <h3 class="title">Trending Products</h3>
-                    <br />
-                    <p>
-                        We specialize in providing a wide range of high-quality laptops and mobile devices to suit every need.
-                        Explore our curated selection and discover the perfect technology to enhance your lifestyle.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="products-grid d-flex flex-wrap justify-content-between" id="productContainer">
-                    @foreach (var item in Model) // Assuming Model contains products
-                    {
-                        <div class="single-product col-lg-3 col-md-4 col-sm-6 mb-4 product">
-                            <div class="product-image">
-                                <a href="/Customer/Home/Details/@item.ID">
-                                    <img src="~/@item.Img" alt="Product Image" style="max-height: 250px; object-fit: cover;">
-                                </a>
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h4 class="title">
-                                    <a href="product-grids.html">@item.Name</a>
-                                </h4>
-                                <div class="price">
-                                    <span>@item.Price</span>
-                                </div>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="single-product">
+                        <div class="product-image">
+                            <a asp-action="Details" asp-route-ProductId="@item.ID">
+                                <img class="card-img-top" src="~/@item.Img" alt="Product Image" style="max-height: 250px; object-fit: cover;">
+                            </a>
+                            <div class="button">
+                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                             </div>
                         </div>
-                    }
+                        <div class="product-info">
+                            <h5 class="fw-bolder text-center">@item.Name</h5>
+                            <div class="price text-center">
+                                <span>$@item.Price</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
-    <nav aria-label="Page navigation">
-        <ul class="pagination" id="paginationControls"></ul>
-    </nav>
 </section>
-<!-- End Products Section -->
 
 <style>
+    .hero-area {
+        /* Additional styles for the hero area */
+        background-color: #f8f9fa;
+    }
+
+    .single-product {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%; /* Ensure the product card takes full height */
+        background: #fff; /* Ensure white background for products */
+        border-radius: 8px; /* Add rounded corners */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        overflow: hidden; /* Prevent overflow */
+        transition: transform 0.3s; /* Animation effect */
+    }
+
+        .single-product:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+    .product-image {
+        position: relative;
+        overflow: hidden; /* Prevent overflow from images */
+    }
+
+    .product-info {
+        padding: 15px; /* Add padding to product info */
+    }
+
     .product {
         min-height: 400px; /* Ensure consistent height for products */
         display: flex;
@@ -136,13 +143,6 @@
         justify-content: space-between;
     }
 
-    .products-grid {
-        display: flex; /* Ensure horizontal alignment */
-        flex-wrap: wrap; /* Allow wrapping of items */
-        justify-content: space-between; /* Space between items */
-    }
-
-    /* Pagination Styles */
     .pagination {
         display: flex;
         justify-content: center;
@@ -182,34 +182,3 @@
                 pointer-events: none; /* Disable clicks */
             }
 </style>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        const itemsPerPage = 8; // Set the number of items per page
-        const items = $('.product'); // Get all product items
-        const totalPages = Math.ceil(items.length / itemsPerPage);
-        const paginationControls = $('#paginationControls');
-
-        function showPage(page) {
-            items.hide(); // Hide all items
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            items.slice(start, end).show(); // Show the current page items
-        }
-
-        function setupPagination() {
-            for (let i = 1; i <= totalPages; i++) {
-                const pageLink = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                pageLink.on('click', function (e) {
-                    e.preventDefault(); // Prevent the default anchor behavior
-                    showPage(i); // Show the corresponding page
-                });
-                paginationControls.append(pageLink); // Append to pagination controls
-            }
-        }
-
-        setupPagination();
-        showPage(1); // Show the first page initially
-    });
-</script>

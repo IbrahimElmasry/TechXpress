@@ -25,6 +25,8 @@ namespace TechXpress.Web.Areas.Admin.Controllers
 
             return View(_context.ApplicationUsers.Where(x => x.Id != userid).ToList());
         }
+
+
         public IActionResult LockUnlock(string ? id)
         {
             var user = _context.ApplicationUsers.FirstOrDefault(x => x.Id == id);

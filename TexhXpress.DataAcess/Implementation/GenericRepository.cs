@@ -42,6 +42,7 @@ namespace TexhXpress.DataAccess.Implementation
             return query.ToList();
         }
 
+
         public T GetFirstOrDfeault(Expression<Func<T, bool>>? predicate = null, string? IncludeWord = null)
         {
             IQueryable<T> query = _dbset;

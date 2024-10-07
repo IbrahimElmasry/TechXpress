@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,17 @@ namespace TexhXpress.DataAccess.Implementation
             _context = context;
         }
 
-        
+        public int DecreaseCount(ShoppingCart shoppingcart, int count)
+        {
+          shoppingcart.Count -= count;
+            return shoppingcart.Count;
+        }
+
+
+        public int IncreaseCount(ShoppingCart shoppingcart, int count)
+        {
+            shoppingcart.Count += count;
+            return shoppingcart.Count;
+        }
     }
 }

@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TechXpress.DataAccess.Data;
 using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
+using TechXpress.Utilities;
+using TexhXpress.DataAccess.Implementation;
 
 namespace TechXpress.Web.Areas.Customer.Controllers
 {
@@ -8,10 +13,12 @@ namespace TechXpress.Web.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+       
 
         public HomeController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;   
+            _unitOfWork = unitOfWork;
+            
         }
 
         public IActionResult Index()
@@ -20,14 +27,44 @@ namespace TechXpress.Web.Areas.Customer.Controllers
 
             return View(products);
         }
-        public IActionResult Details(int Id) 
-        { 
+        public IActionResult Details(int ProductId)
+        {
             ShoppingCart obj = new ShoppingCart()
             {
-                Product = _unitOfWork.Product.GetFirstOrDfeault(x => x.ID == Id, IncludeWord: "Category"),
-                Count = 1 
+                ProductId = ProductId,
+                Product = _unitOfWork.Product.GetFirstOrDfeault(v => v.ID == ProductId, IncludeWord: "Category"),
+                Count = 1
             };
             return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            shoppingCart.ApplicationUserId = claim.Value;
+
+            ShoppingCart Cartobj = _unitOfWork.ShoppingCart.GetFirstOrDfeault(
+                u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
+
+            if (Cartobj == null)
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.complete();
+
+
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.IncreaseCount(Cartobj, shoppingCart.Count);
+                _unitOfWork.complete();
+            }
+
+
+            return RedirectToAction("Index");
         }
     }
 }

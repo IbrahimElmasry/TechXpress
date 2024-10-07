@@ -1,76 +1,28 @@
 ﻿@model ShoppingCart
-<!-- Start Item Details -->
-<section class="item-details section">
-    <style>
-        /* Zoom effect for product image */
-        .zoom-image {
-            transition: transform 0.3s ease; /* Smooth transition for zoom effect */
-        }
 
-            .zoom-image:hover {
-                transform: scale(1.1); /* Scale image on hover */
-            }
-
-        /* Align the Add to Cart button with the Quantity input */
-        .add-to-cart {
-            display: flex;
-            align-items: center; /* Aligns items in the center */
-            gap: 10px; /* Adds space between quantity input and button */
-        }
-
-        .qty-label {
-            display: flex;
-            align-items: center; /* Center the quantity label and input */
-        }
-
-            .qty-label div {
-                display: flex; /* Ensures the input is aligned properly */
-                align-items: center; /* Center the input */
-            }
-
-            .qty-label input {
-                max-width: 70px; /* Adjust width for better fit */
-            }
-    </style>
-
-    <div class="container">
-        <div class="top-area">
-            <div class="row align-items-center">
-                <!-- Product Images -->
-                <div class="col-lg-6 col-md-12 col-12">
-                    <div class="product-images">
-                        <main id="gallery">
-                            <div class="main-img">
-                                <img src="~/@Model.Product.Img" alt="Product Image" id="current" class="img-fluid zoom-image" />
-                            </div>
-                        </main>
+<form method="post" asp-action="Details">
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <input hidden asp-for="ProductId" />
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/@Model.Product.Img" alt="..." width="600" height="700"></div>
+                <div class="col-md-6">
+                    <div class="small mb-1">@Model.Product.Category.Name</div>
+                    <h1 class="display-5 fw-bolder">@Model.Product.Name</h1>
+                    <div class="fs-5 mb-5">
+                        <span class="text-decoration-line-through">$45.00</span>
+                        <span>$@Model.Product.Price</span>
                     </div>
-                </div>
-                <!-- Product Info -->
-                <div class="col-lg-6 col-md-12 col-12">
-                    <div class="product-info">
-                        <h2 class="title">@Model.Product.Name</h2>
-                        <p class="category">
-                            <i class="lni lni-tag"></i> @Model.Product.Category.Name
-                        </p>
-                        <h3 class="price">@Model.Product.Price.ToString("C")</h3>
-                        <p class="info-text">@Model.Product.Description</p>
-
-                        <div class="add-to-cart">
-                            <div class="qty-label">
-                                                              
-                                <div>
-                                    <input class="form-control text-center me-2" id="inputQuantity" asp-for="Count" />
-                                </div>
-                            </div>
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i> Add to cart
-                            </button>
-                        </div>
+                    <p class="lead">@Html.Raw(Model.Product.Description)</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" asp-for="Count" style="max-width: 3rem">
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- End Item Details -->
+    </section>
+</form>

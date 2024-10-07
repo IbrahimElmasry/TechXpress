@@ -12,7 +12,6 @@ namespace TechXpress.Entities.Repositories
         //_context.category.Tolist
         IEnumerable<T> GetAll(Expression<Func<T , bool>>? predicate =null , string? IncludeWord = null);
 
-
         T GetFirstOrDfeault(Expression<Func<T, bool>>? predicate = null, string? IncludeWord = null);
 
         void Add(T entity);
