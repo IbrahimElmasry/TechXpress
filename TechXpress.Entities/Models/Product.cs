@@ -19,7 +19,7 @@ namespace TechXpress.Entities.Models
 
         [DisplayName("Image")]
         [ValidateNever]
-        public string Img { get; set; }
+        public string? Img { get; set; }
 
         [Required]
         public decimal Price { get; set; }
