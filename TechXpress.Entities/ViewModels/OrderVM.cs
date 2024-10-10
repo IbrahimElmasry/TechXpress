@@ -7,12 +7,10 @@ using TechXpress.Entities.Models;
 
 namespace TechXpress.Entities.ViewModels
 {
-    public class ShoppingCartVM
+    public class OrderVM
     {
-        public IEnumerable <ShoppingCart> CartsList { get; set; }
+        public OrderHeader OrderHeader { get; set; }
 
-        public decimal TotalCarts { get; set; }
-
-		public OrderHeader OrderHeader { get; set; }
-	}
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+    }
 }

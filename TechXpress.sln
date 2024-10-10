@@ -8,8 +8,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechXpress.Entities", "TechXpress.Entities\TechXpress.Entities.csproj", "{29122843-7754-4DF2-80C7-EEA4A8E6C623}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechXpress.Web", "TechXpress.Web\TechXpress.Web.csproj", "{3CC10CEA-A489-4B2C-9881-E08B768B97CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{29122843-7754-4DF2-80C7-EEA4A8E6C623} = {29122843-7754-4DF2-80C7-EEA4A8E6C623}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechXpress.Utilities", "TechXpress.Utilities\TechXpress.Utilities.csproj", "{118C8A58-87A0-41F5-A4E0-48661299A329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechXpress.Utilities", "TechXpress.Utilities\TechXpress.Utilities.csproj", "{118C8A58-87A0-41F5-A4E0-48661299A329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

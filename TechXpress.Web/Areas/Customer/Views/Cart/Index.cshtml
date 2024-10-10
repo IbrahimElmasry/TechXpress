@@ -35,11 +35,11 @@
         .product {
             border-bottom: 1px solid #ddd;
             padding: 15px 0;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
             .product:hover {
-                transform: scale(1.01);
+                transform: translateY(-2px);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             }
 
@@ -47,7 +47,12 @@
             max-height: 150px;
             object-fit: cover;
             border-radius: 5px;
+            transition: transform 0.2s;
         }
+
+            .image:hover {
+                transform: scale(1.05);
+            }
 
         .product-name a {
             font-weight: bold;
@@ -99,10 +104,21 @@
         .btn-primary {
             background-color: #007bff;
             border: none;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
             .btn-primary:hover {
                 background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+        .btn-danger {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                transform: translateY(-2px);
             }
 
         .fa {
@@ -117,63 +133,80 @@
                 <div class="block-heading">
                     <h2>Shopping Cart</h2>
                 </div>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-8">
-                            <div class="items">
-                                @foreach (var item in Model.CartsList)
-                                {
-                                    <div class="product">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <img class="img-fluid mx-auto d-block image" src="~/@item.Product.Img" alt="@item.Product.Name">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-5 product-name">
-                                                            <a href="#">@item.Product.Name</a>
-                                                            <div class="product-info">
-                                                                <div>Description: <span class="value">@item.Product.Description</span></div>
+                @if (Model.CartsList.Count() < 1)
+				{
+                    <h4>There is no Items in Your Cart</h4>
+                }
+                else
+                {
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-8">
+                                <div class="items">
+                                    @foreach (var item in Model.CartsList)
+                                    {
+                                        <div class="product">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img class="img-fluid mx-auto d-block image" src="~/@item.Product.Img" alt="@item.Product.Name">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="info">
+                                                        <div class="row">
+                                                            <div class="col-md-5 product-name">
+                                                                <a href="#">@item.Product.Name</a>
+                                                                <div class="product-info">
+                                                                    <div>Description: <span class="value">@item.Product.Description</span></div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4 quantity">
-                                                            <label for="quantity">Quantity:</label>
-                                                            <div class="btn-group" role="group">
-                                                                <a class="btn btn-primary" asp-action="plus" asp-route-cartid="@item.Id">+</a>
-                                                                <span class="mx-2">@item.Count</span>
-                                                                <a class="btn btn-primary" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
+                                                            <div class="col-md-4 quantity">
+                                                                <label for="quantity">Quantity:</label>
+                                                                <div class="btn-group" role="group">
+                                                                    <a class="btn btn-primary" asp-action="plus" asp-route-cartid="@item.Id">+</a>
+                                                                    <span class="mx-2">@item.Count</span>
+                                                                    <a class="btn btn-primary" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-3 price">
-                                                            <span>$@item.Product.Price</span>
-                                                        </div>
-                                                        <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
-                                                            <a asp-action="Remove" asp-route-cartId="@item.Id" class="btn btn-danger">
-                                                                Remove From Cart
-                                                                <i class="bi bi-trash-fill"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div> <!-- Closing row for product info -->
-                                                </div> <!-- Closing info div -->
-                                            </div> <!-- Closing col-md-8 div -->
-                                        </div> <!-- Closing row for product -->
-                                    </div> <!-- Closing product div -->
-                                } <!-- Closing foreach -->
-                            </div> <!-- Closing items div -->
-                        </div> <!-- Closing col-md-12 col-lg-8 div -->
-                        <div class="col-md-12 col-lg-4">
-                            <div class="summary">
-                                <h3>Summary</h3>
-                               @*  <div class="summary-item"><span class="text">Subtotal</span><span class="price subtotal">$360</span></div>
-                                <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-                                <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div> *@
-                                <div class="summary-item"><span class="text">Total</span><span class="price total">$ @Model.TotalCarts.ToString()</span></div>
-                                <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fas fa-shopping-cart"></i> Checkout</button>
-                            </div> <!-- Closing summary div -->
-                        </div> <!-- Closing col-md-12 col-lg-4 div -->
-                    </div> <!-- Closing row -->
-                </div> <!-- Closing content div -->
+                                                            <div class="col-md-3 price">
+                                                                <span>$@item.Product.Price</span>
+                                                            </div>
+                                                            <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
+                                                                <a asp-action="Remove" asp-route-cartId="@item.Id" class="btn btn-danger">
+                                                                    Remove From Cart
+                                                                    <i class="bi bi-trash-fill"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div> <!-- Closing row for product info -->
+                                                    </div> <!-- Closing info div -->
+                                                </div> <!-- Closing col-md-8 div -->
+                                            </div> <!-- Closing row for product -->
+                                        </div> <!-- Closing product div -->
+                                    } <!-- Closing foreach -->
+                                </div> <!-- Closing items div -->
+                            </div> <!-- Closing col-md-12 col-lg-8 div -->
+                            @if (Model.CartsList.Count() != 0)
+                            {
+                                <div class="col-md-12 col-lg-4">
+                                    <div class="summary">
+                                        <h3 class="text-center">Order Summary</h3>
+                                        <hr>
+                                        <div class="summary-item d-flex justify-content-between">
+                                            <span class="text">Total</span>
+                                            <span class="price total font-weight-bold">$@Model.TotalCarts.ToString()</span>
+                                        </div>
+                                        <hr>
+                                        <div class="text-center">
+                                            <a asp-action="Summary" class="btn btn-primary btn-lg mt-3">Order Summary</a>
+                                        </div>
+                                    </div> <!-- Closing summary div -->
+                                </div> <!-- Closing col-md-12 col-lg-4 div -->
+                            }
+
+
+                        </div> <!-- Closing row -->
+                    </div> <!-- Closing content div -->
+                }
+                
             </div> <!-- Closing container div -->
         </section>
     </main>

@@ -1,26 +1,89 @@
 ﻿@if (TempData["Create"] != null)
 {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
     <script type="text/javascript">
-        Command: toastr["success"]("@TempData["Create"]", "Admin Dash Board Notification Center")
+        toastr.options = {
+            "closeButton": true,                 // Add close button
+            "progressBar": true,                 // Add progress bar
+            "positionClass": "toast-top-right",  // Ensure position is top-right
+            "timeOut": "5000",                   // How long the notification is displayed
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",              // Animation style (fadeIn, slideDown, etc.)
+            "hideMethod": "fadeOut"
+        };
+        toastr["success"]("@Html.Raw(TempData["Create"])", "Admin Dash Board Notification Center");
     </script>
 }
 
 @if (TempData["Update"] != null)
 {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
     <script type="text/javascript">
-        Command: toastr["info"]("@TempData["Update"]", "Admin Dash Board Notification Center")
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",  // Ensure position is top-right
+            "timeOut": "5000",
+            "extendedTimeOut": "1000"
+        };
+        toastr["info"]("@Html.Raw(TempData["Update"])", "Admin Dash Board Notification Center");
     </script>
 }
 
 @if (TempData["Delete"] != null)
 {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
     <script type="text/javascript">
-        Command: toastr["error"]("@TempData["Delete"]", "Admin Dash Board Notification Center")
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",  // Ensure position is top-right
+            "timeOut": "5000",
+            "extendedTimeOut": "1000"
+        };
+        toastr["error"]("@Html.Raw(TempData["Delete"])", "Admin Dash Board Notification Center");
     </script>
 }
+
+
+<style>
+    /* Remove transparency and make success notification solid */
+    .toast-success {
+        background-color: #28a745 !important; /* Solid green background for success */
+        color: #fff !important; /* White text */
+        opacity: 1 !important; /* Fully opaque */
+    }
+
+    /* Solid background for error notification */
+    .toast-error {
+        background-color: #dc3545 !important; /* Solid red background for error */
+        color: #fff !important;
+        opacity: 1 !important;
+    }
+
+    /* Solid background for info notification */
+    .toast-info {
+        background-color: #17a2b8 !important; /* Solid blue background for info */
+        color: #fff !important;
+        opacity: 1 !important;
+    }
+
+    /* Solid background for warning notification */
+    .toast-warning {
+        background-color: #ffc107 !important; /* Solid yellow background for warning */
+        color: #000 !important;
+        opacity: 1 !important;
+    }
+
+</style>
