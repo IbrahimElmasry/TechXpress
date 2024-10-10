@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
+using TechXpress.Entities.ViewModels;
+using TexhXpress.DataAccess.Implementation;
 
 namespace TechXpress.Web.Areas.Admin.Controllers
 {
@@ -23,6 +25,19 @@ namespace TechXpress.Web.Areas.Admin.Controllers
             IEnumerable<OrderHeader> orderHeaders;
             orderHeaders = _unitOfWork.OrderHeader.GetAll(IncludeWord: "ApplicationUser");
             return Json(new { data = orderHeaders });
+        }
+
+
+        [HttpGet]
+        public IActionResult Details(int orderid)
+        {
+            OrderVM orderVM = new OrderVM()
+            {
+                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDfeault(u => u.Id == orderid, IncludeWord: "ApplicationUser"),
+                OrderDetails = _unitOfWork.OrderDetail.GetAll(x => x.OrderHeaderId == orderid, IncludeWord: "Product")
+            };
+            return View(orderVM);
+
         }
     }
 }
