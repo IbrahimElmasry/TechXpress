@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
@@ -9,6 +10,7 @@ using TexhXpress.DataAccess.Implementation;
 namespace TechXpress.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+	[Authorize(SD.AdminRole)]
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
