@@ -24,7 +24,7 @@ namespace TexhXpress.DataAccess.Implementation
 
 		public void UpdateStatus(int id, string? OrderStatus, string? PaymentStatus)
 		{
-			var OrderFromDb = _context.OrderHeaders.FirstOrDefault(x => x.Id == id);
+			var OrderFromDb = _context.OrderHeaders.SingleOrDefault(x => x.Id == id);
 			if (OrderFromDb != null)
 			{
 				OrderFromDb.OrderStatus = OrderStatus;
