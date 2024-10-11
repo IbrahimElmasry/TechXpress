@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Product>
-
+﻿@model IPagedList<Product>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 <!-- Start Hero Area -->
 <section class="hero-area">
     <div class="container">
@@ -101,9 +102,21 @@
                     </div>
                 </div>
             }
+
+
         </div>
     </div>
+    <!-- Pagination Controls -->
+    <div class="pagination-container">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, categoryId = ViewBag.CurrentCategoryId }),
+                 new PagedListRenderOptions
+        {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
+        })
+    </div>
 </section>
+
 
 <style>
     .hero-area {

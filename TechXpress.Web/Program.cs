@@ -24,7 +24,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 // Define Authorization Policy for Admin role
 builder.Services.AddAuthorization(options =>
 {
@@ -50,6 +51,7 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("stripe:Secretkey"
 app.UseAuthentication(); // Ensure this line is added before authorization
 
 app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 
 app.MapControllerRoute(

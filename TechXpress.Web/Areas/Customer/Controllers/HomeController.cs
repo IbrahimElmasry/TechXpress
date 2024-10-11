@@ -7,6 +7,7 @@ using TechXpress.Entities.Repositories;
 using TechXpress.Utilities;
 using TechXpress.Web.Controllers;
 using TexhXpress.DataAccess.Implementation;
+using X.PagedList;
 
 namespace TechXpress.Web.Areas.Customer.Controllers
 {
@@ -21,28 +22,29 @@ namespace TechXpress.Web.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
             
         }
-
-        public IActionResult Index(int categoryId)
+        public IActionResult Index(int? categoryId, int? page)
         {
-            //var products = _unitOfWork.Product.GetAll();
+            IEnumerable<Product> products;
 
-            //return View(products);
-
-            if (categoryId == null || categoryId==0)
+            // If no category is selected, return all products
+            if (categoryId == null || categoryId == 0)
             {
-                // If no category is selected, return all products
-                var allProducts = _unitOfWork.Product.GetAll().ToList();
-                return View(allProducts);
+                products = _unitOfWork.Product.GetAll();
+            }
+            else
+            {
+                // Fetch products by the selected category
+                products = _unitOfWork.Product.GetAll(p => p.CategoryId == categoryId);
             }
 
-            // Fetch products by the selected category
-            var products = _unitOfWork.Product
-                          .GetAll(p => p.CategoryId == categoryId)
-                          .ToList();
+            // Define the page size (number of products per page)
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
 
-            return View(products);
+            // Return the paginated list of products
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
-      
+
         public IActionResult Details(int ProductId)
         {
             ShoppingCart obj = new ShoppingCart()
@@ -70,8 +72,7 @@ namespace TechXpress.Web.Areas.Customer.Controllers
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
                 _unitOfWork.complete();
-
-
+                HttpContext.Session.SetInt32(SD.SessionKey, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).ToList().Count);
             }
             else
             {
