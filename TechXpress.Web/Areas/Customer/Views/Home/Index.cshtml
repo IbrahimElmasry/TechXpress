@@ -89,7 +89,7 @@
                                 <img class="card-img-top" src="~/@item.Img" alt="Product Image" style="max-height: 250px; object-fit: cover;">
                             </a>
                             <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+                                <a asp-action="Details" asp-route-ProductId="@item.ID" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                             </div>
                         </div>
                         <div class="product-info">

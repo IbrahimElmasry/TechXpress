@@ -27,6 +27,7 @@ namespace TechXpress.Entities.Models
         [Required]
         [DisplayName("Category")]
         public int CategoryId { get; set; }
+
         [ValidateNever]
         public Category Category { get; set; }
 

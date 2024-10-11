@@ -3,7 +3,6 @@
     ViewBag.PageTitle = "Category Management";
     ViewBag.CardTitle = "Create Category";
 }
-
 <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
         <h4>@ViewBag.CardTitle</h4>
@@ -18,7 +17,7 @@
 
             <div class="mb-3">
                 <label asp-for="Description" class="form-label"></label>
-                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter category description"></textarea>
+                <textarea id="mytextarea" asp-for="Description" class="form-control" rows="3" placeholder="Enter category description"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
@@ -36,4 +35,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        tinymce.init({
+          selector: '#mytextarea',
+          license_key: 'gpl|<your-license-key>'
+        });
+    </script>
 }

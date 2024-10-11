@@ -6,20 +6,21 @@ using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
 using TechXpress.Entities.ViewModels;
 using TechXpress.Utilities;
+using TechXpress.Web.Controllers;
 
 namespace TechXpress.Web.Areas.Customer.Controllers
 {
 
     [Area("Customer")]
     [Authorize]
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
 
         public ShoppingCartVM ShoppingCartVM { get; set; }
         public int TotalCarts { get; set; }
 
-        public CartController (IUnitOfWork unitOfWork)
+        public CartController (IUnitOfWork unitOfWork) :base(unitOfWork)
         {
             _unitOfWork = unitOfWork;
     }

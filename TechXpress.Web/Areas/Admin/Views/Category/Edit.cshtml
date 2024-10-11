@@ -39,4 +39,10 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        tinymce.init({
+          selector: '#mytextarea',
+          license_key: 'gpl|<your-license-key>'
+        });
+    </script>
 }

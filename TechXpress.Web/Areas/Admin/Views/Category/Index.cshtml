@@ -11,13 +11,16 @@
 </div>
 
 <table class="table table-hover" width="100%">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Created On</th>
-        <th>Edit</th>
-        <th>Remove</th>
-    </tr>
+    <thead class="text-bold">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created On</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+
     @foreach (var item in Model)
     {
         <tr>

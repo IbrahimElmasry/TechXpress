@@ -5,28 +5,44 @@ using TechXpress.DataAccess.Data;
 using TechXpress.Entities.Models;
 using TechXpress.Entities.Repositories;
 using TechXpress.Utilities;
+using TechXpress.Web.Controllers;
 using TexhXpress.DataAccess.Implementation;
 
 namespace TechXpress.Web.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
        
 
-        public HomeController(IUnitOfWork unitOfWork)
+        public HomeController(IUnitOfWork unitOfWork):base(unitOfWork)
         {
             _unitOfWork = unitOfWork;
             
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int categoryId)
         {
-            var products = _unitOfWork.Product.GetAll();
+            //var products = _unitOfWork.Product.GetAll();
+
+            //return View(products);
+
+            if (categoryId == null || categoryId==0)
+            {
+                // If no category is selected, return all products
+                var allProducts = _unitOfWork.Product.GetAll().ToList();
+                return View(allProducts);
+            }
+
+            // Fetch products by the selected category
+            var products = _unitOfWork.Product
+                          .GetAll(p => p.CategoryId == categoryId)
+                          .ToList();
 
             return View(products);
         }
+      
         public IActionResult Details(int ProductId)
         {
             ShoppingCart obj = new ShoppingCart()
