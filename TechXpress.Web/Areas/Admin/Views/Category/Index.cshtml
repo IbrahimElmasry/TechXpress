@@ -25,7 +25,7 @@
     {
         <tr>
             <td>@item.Name</td>
-            <td>@item.Description</td>
+            <td>@Html.Raw(item.Description)</td>
             <td>@item.CreatedOn</td>
             <td>
                 <a class="btn btn-success" href="/Admin/Category/Edit/@item.Id">Edit</a>

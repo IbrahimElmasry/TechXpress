@@ -19,7 +19,7 @@
 
             <div class="mb-4">
                 <label asp-for="product.Description" class="form-label fw-bold">Product Description</label>
-                <textarea asp-for="product.Description" class="form-control form-control-lg" rows="4" placeholder="Enter Product description"></textarea>
+                <textarea id="mytextarea" asp-for="product.Description" class="form-control form-control-lg" rows="4" placeholder="Enter Product description"></textarea>
                 <span asp-validation-for="product.Description" class="text-danger small"></span>
             </div>
 
@@ -52,9 +52,17 @@
                 </a>
             </div>
         </form>
+
     </div>
+
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        tinymce.init({
+          selector: '#mytextarea',
+          license_key: 'gpl|<your-license-key>'
+        });
+    </script>
 }
