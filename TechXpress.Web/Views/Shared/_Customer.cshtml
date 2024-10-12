@@ -123,28 +123,31 @@
                                     <span>(+20) 1019804919</span>
                                 </h3>
                             </div>
-                            <div class="navbar-cart">
-                                
-                                <div class="cart-items">
-                                    <a href="/customer/Cart/Index" class="main-btn"> 
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="navbar-cart">
 
-                                        <i class="lni lni-cart"></i>
-                                        @await Component.InvokeAsync("ShoppingCart")
+                                    <div class="cart-items">
+                                        <a href="/customer/Cart/Index" class="main-btn">
 
-                                      @*   @if (httpContextAccessor.HttpContext.Session.GetInt32(SD.SessionKey)!=null)
+                                            <i class="lni lni-cart"></i>
+                                            @await Component.InvokeAsync("ShoppingCart")
+
+                                            @*   @if (httpContextAccessor.HttpContext.Session.GetInt32(SD.SessionKey)!=null)
                                         {
-                                            @httpContextAccessor.HttpContext.Session.GetInt32(SD.SessionKey)
+                                        @httpContextAccessor.HttpContext.Session.GetInt32(SD.SessionKey)
 
                                         }
                                         else
                                         {
-                                            <span class="total-items">0</span>
+                                        <span class="total-items">0</span>
 
                                         } *@
-                                    </a>
-                                   
+                                        </a>
+
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
