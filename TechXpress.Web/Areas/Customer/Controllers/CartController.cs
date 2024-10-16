@@ -177,6 +177,8 @@ namespace TechXpress.Web.Areas.Customer.Controllers
 
             // Remove all items from the user's shopping cart
             List<ShoppingCart> shoppingcarts = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
+            HttpContext.Session.Clear();
+
             _unitOfWork.ShoppingCart.RemoveRange(shoppingcarts);
             _unitOfWork.complete();
             return View(id);
