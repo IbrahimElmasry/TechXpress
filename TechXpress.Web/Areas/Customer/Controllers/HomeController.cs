@@ -22,6 +22,14 @@ namespace TechXpress.Web.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
             
         }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
         public IActionResult Index(int? categoryId, int? page)
         {
             IEnumerable<Product> products;

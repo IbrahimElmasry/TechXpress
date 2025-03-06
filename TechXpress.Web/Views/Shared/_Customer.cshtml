@@ -66,8 +66,8 @@
 
                                     <li><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">Admin Control Panel</a></li>
                                 }
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a asp-action="AboutUs" asp-controller="Home">About Us</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -190,8 +190,9 @@
                                     <li class="nav-item d-none d-sm-inline-block">
                                         <a asp-action="Index" asp-controller="Home" class="nav-link">Home</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
+                                     
+                                    <li class="nav-item d-none d-sm-inline-block">
+                                        <a asp-action="ContactUs" asp-controller="Home" class="nav-link">Contact Us</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
