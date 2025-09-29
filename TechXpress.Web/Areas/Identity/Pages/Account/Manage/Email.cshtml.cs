@@ -19,12 +19,12 @@ namespace TechXpress.Web.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+    private readonly Microsoft.AspNetCore.Identity.UI.Services.IEmailSender _emailSender;
 
         public EmailModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IEmailSender emailSender)
+            Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

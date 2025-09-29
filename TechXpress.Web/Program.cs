@@ -22,7 +22,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddDefaultTokenProviders().AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddSingleton<TechXpress.Utilities.IEmailSender, TechXpress.Utilities.EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();

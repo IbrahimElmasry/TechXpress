@@ -20,9 +20,9 @@ namespace TechXpress.Web.Areas.Identity.Pages.Account
     public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender _emailSender;
+    private readonly Microsoft.AspNetCore.Identity.UI.Services.IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+    public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

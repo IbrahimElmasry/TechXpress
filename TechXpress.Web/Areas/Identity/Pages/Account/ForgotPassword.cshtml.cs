@@ -19,9 +19,9 @@ namespace TechXpress.Web.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender _emailSender;
+    private readonly Microsoft.AspNetCore.Identity.UI.Services.IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+    public ForgotPasswordModel(UserManager<IdentityUser> userManager, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
