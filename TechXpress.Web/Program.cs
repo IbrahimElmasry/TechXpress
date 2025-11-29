@@ -28,7 +28,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 // Define Authorization Policy for Admin role
 builder.Services.AddAuthorization(options =>
-{
+    {
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 });
 
